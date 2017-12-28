@@ -1,0 +1,35 @@
+{% extends 'admin/admin-base-layout.html' %}
+
+{% block main_content %}
+    <!-- start: Content -->
+    <div id="content" class="span10">
+        <div class="">
+            <h1 class="tab-heading">Books</h1>
+            <input type="hidden" id="access_token" value={{ access_token }}>
+            <table id="users-table" class="table table-striped datatable table-bordered" style="table-layout:fixed; word-break:break-all;">
+                <thead>
+                <tr>
+                    <th style="width:200px;">Title</th>
+                    <th style="width:200px;">Author</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% csrf_token %}
+                {% for book in book_objects %}
+                    <tr>
+                        <td> <a href="{{ BASE_URL }}book/search/?book_title={{book.book_title}}"> {{ book.book_title|capfirst }}</td>
+                        <td>{{ book.book_author }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!--/row-->
+    </div><!--/.fluid-container-->
+    <!-- end: Content -->
+{% endblock %}
+
+{% block custom_js %}
+    <script type="text/javascript" src="{{ S3_URL }}js/book-common.js"></script>
+    <script type="text/javascript" src="{{ S3_URL }}js/book.js"></script>
+{% endblock %}

@@ -1,0 +1,35 @@
+<!-- start: Header -->
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="index.html"><span>Book Recommendation System</span></a>
+
+            <!-- start: Header Menu -->
+            <div class="nav-no-collapse header-nav">
+                <ul class="nav pull-right">
+                    <!-- start: User Dropdown -->
+                    <li class="dropdown header-right-btn" style="display: inline-flex;">
+                        <a class="btn" href="#">
+                            <i class="halflings-icon white user"></i> {{ request.user.name }}
+                        </a>
+                        <form id="admin-logout1" action="{{ BASE_URL }}book/logout/" method="post">
+                            {% csrf_token %}
+                            <button class="btn" id='logout1' type="submit">
+                                |&nbsp;&nbsp;&nbsp;&nbsp;<i class="halflings-icon white off"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                    <!-- end: User Dropdown -->
+                </ul>
+            </div>
+            <!-- end: Header Menu -->
+
+        </div>
+    </div>
+</div>
+<!-- start: Header -->

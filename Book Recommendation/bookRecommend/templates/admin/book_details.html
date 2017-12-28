@@ -1,0 +1,101 @@
+{% extends 'admin/admin-base-layout.html' %}
+
+{% block main_content %}
+    <!-- start: Content -->
+    <div id="content" class="span10">
+        <div class="container">
+            <h1 align="center">Current Book</h1>
+            <br>
+            <div class="row">
+                 <div class="span1">
+                 </div>
+                <div class="span3">
+      <div class="thumbnail">
+        <a href="{{ BASE_URL }}book/search/?book_title={{current_book.book_title}}" target="_blank">
+          <img src="{{current_book.image_url_l}}" alt="Image Not Available">
+          <div class="caption">
+            <p>{{current_book.book_title}}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+                <div class="span7">
+                    <br>
+                    <br>
+                    <br>
+                    <table class="table table-striped">
+  <!--<caption>Details of the Book</caption>-->
+                        <br>
+  <!--<thead>-->
+    <!--<tr>-->
+      <!--<th scope="col">#</th>-->
+      <!--<th scope="col">First Name</th>-->
+      <!--<th scope="col">Last Name</th>-->
+      <!--<th scope="col">Username</th>-->
+    <!--</tr>-->
+  <!--</thead>-->
+  <tbody>
+    <tr>
+          <th>Book Title</th>
+            <td>{{current_book.book_title}}</td>
+        </tr>
+        <tr>
+          <th>Author</th>
+            <td>{{current_book.book_author}}</td>
+        </tr>
+        <tr>
+          <th>Publisher</th>
+            <td>{{current_book.publisher}}</td>
+        </tr>
+      <tr>
+         <th>Year of Publication</th>
+            <td>{{current_book.year_of_publication}}</td>
+        </tr>
+         <th>Average Rating</th>
+            <td>8.2
+</td>
+        </tr>
+        </tr>
+         <th>Your Rating</th>
+            <td><input type="number" class="text" id="your_rating" min="0" value="{{current_book.book_rating}}" max="10" name="name"/>
+                <input type="hidden" id="book_titler" value="{{current_book.book_title}}"/>
+            <button href="#" id="saveChangess" onclick="updaterating()" class="btn btn-success">Update Rating</button></td>
+        </tr>
+  </tbody>
+</table>
+
+    </div>
+            </div>
+        </div>
+        <div class="container">
+            <h1 align="center">Books Similar to this Book</h1>
+            <br>
+        <div class="row">
+            {% for book in recommended_books %}
+    <div class="span2"><div class="thumbnail">
+        <a href="{{ BASE_URL }}book/search/?book_title={{book.book_title}}" target="_blank">
+          <img src="{{book.image_url_m}}" alt="Image Not Available">
+          <div class="caption">
+            <p>{{book.book_title}}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% if forloop.counter|divisibleby:6 %}
+</div>
+<div class="row">
+    {% endif %}
+{% endfor %}
+
+            </div>
+
+        <!--/row-->
+    </div><!--/.fluid-container-->
+    <!-- end: Content -->
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+    <script type="text/javascript" src="{{ S3_URL }}js/book-common.js"></script>
+    <script type="text/javascript" src="{{ S3_URL }}js/book.js"></script>
+{% endblock %}
